@@ -1,0 +1,159 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// --- 권한 설정 ---
+enum UserRole {
+  USER        // 일반 학생
+  INSTRUCTOR  // 강사
+  ADMIN       // 관리자
+}
+
+// --- 1. 회원 (Auth.js 호환 포함) ---
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  password      String?   // Hashed
+  role          UserRole  @default(USER)
+  image         String?
+  createdAt     DateTime  @default(now())
+  
+  // Relations
+  orders        Order[]     // 주문 내역
+  progresses    Progress[]  // 수강 진도
+  posts         Post[]      // 작성한 게시글(Q&A, 후기)
+  userCoupons   UserCoupon[]
+  ownedCourses  Course[]    @relation("InstructorCourses") // 강사일 경우
+}
+
+// --- 2. 강좌 및 강의 ---
+model Category {
+  id      Int      @id @default(autoincrement())
+  name    String   @unique
+  courses Course[]
+}
+
+model Course {
+  id          String   @id @default(cuid())
+  title       String
+  description String?  @db.Text
+  thumbnail   String?
+  price       Int      @default(0)
+  isPublished Boolean  @default(false)
+  
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
+  
+  instructorId String
+  instructor   User     @relation("InstructorCourses", fields: [instructorId], references: [id])
+
+  lessons     Lesson[]
+  orders      Order[]
+  posts       Post[]
+  createdAt   DateTime @default(now())
+}
+
+model Lesson {
+  id          String   @id @default(cuid())
+  title       String
+  videoUrl    String   // 비디오 스트리밍 주소
+  duration    Int      @default(0) // 초 단위 길이
+  order       Int      // 강의 순서
+  
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  progresses  Progress[]
+}
+
+// --- 3. 수강 진도율 (LMS 핵심) ---
+model Progress {
+  id          String   @id @default(cuid())
+  isCompleted Boolean  @default(false)
+  lastPosition Int     @default(0) // 마지막 시청 위치 (초)
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  lessonId    String
+  lesson      Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  updatedAt   DateTime @updatedAt
+  @@unique([userId, lessonId]) // 한 학생이 한 강의에 대해 하나의 진도만 가짐
+}
+
+// --- 4. 주문 및 결제 (포트원 연동 대비) ---
+enum OrderStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  amount        Int
+  status        OrderStatus @default(PENDING)
+  paymentId     String?     @unique // 포트원 결제 고유 번호 (merchant_uid)
+  
+  userId        String
+  user          User        @relation(fields: [userId], references: [id])
+  
+  courseId      String
+  course        Course      @relation(fields: [courseId], references: [id])
+  
+  createdAt     DateTime    @default(now())
+}
+
+// --- 5. 쿠폰 시스템 ---
+model Coupon {
+  id          String   @id @default(cuid())
+  code        String   @unique
+  discount    Int      // 할인 금액 또는 비율
+  isPercent   Boolean  @default(false)
+  expiryDate  DateTime
+  
+  userCoupons UserCoupon[]
+}
+
+model UserCoupon {
+  id        String   @id @default(cuid())
+  isUsed    Boolean  @default(false)
+  usedAt    DateTime?
+  
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  
+  couponId  String
+  coupon    Coupon   @relation(fields: [couponId], references: [id])
+}
+
+// --- 6. 커뮤니티 (Q&A, 수강후기) ---
+enum PostType {
+  QNA
+  REVIEW
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  type      PostType
+  title     String
+  content   String   @db.Text
+  rating    Int?     // 후기일 경우 별점 (1~5)
+  
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id])
+  
+  createdAt DateTime @default(now())
+}
