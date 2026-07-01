@@ -17,7 +17,7 @@ export default async function Header() {
         {session ? (
           <>
             <span>{session.user?.name}님</span>
-            <form action={async () => { "useServer"; await signOut(); }}>
+            <form action={async () => { "use server"; await signOut(); }}>
               <button style={{ background: "none", border: "none", color: "#666", cursor: "pointer" }}>로그아웃</button>
             </form>
           </>
