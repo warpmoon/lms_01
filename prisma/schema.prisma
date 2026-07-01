@@ -207,10 +207,19 @@ model Exam {
   createdAt   DateTime @default(now())
 }
 
+enum QuestionType {
+  OX
+  MULTIPLE_CHOICE
+  SHORT_ANSWER
+  DESCRIPTIVE
+}
+
 model Question {
-  id        String   @id @default(cuid())
-  content   String   @db.Text
-  score     Int      @default(10) // 문제 배점
+  id            String       @id @default(cuid())
+  type          QuestionType @default(MULTIPLE_CHOICE)
+  content       String       @db.Text
+  score         Int          @default(10) // 문제 배점
+  correctAnswer String?      @db.Text    // 단답형 정답 혹은 서술형 예시 가이드
   
   examId    String
   exam      Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
@@ -228,9 +237,10 @@ model Choice {
 }
 
 model Submission {
-  id        String   @id @default(cuid())
-  score     Int
-  isPassed  Boolean  @default(false)
+  id          String   @id @default(cuid())
+  score       Int
+  isPassed    Boolean  @default(false)
+  answersJson String?  @db.Text // 학생이 기입해 제출한 답안지 원본 (단답/서술형 백업용)
   submittedAt DateTime @default(now())
   
   userId    String

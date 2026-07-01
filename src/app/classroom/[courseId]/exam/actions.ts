@@ -56,14 +56,21 @@ export async function submitExam(examId: string, answers: { [questionId: string]
   // 2. 채점 로직 진행
   exam.questions.forEach((question) => {
     totalScore += question.score;
-    const userAnswerId = answers[question.id];
+    const userAnswer = answers[question.id];
 
-    // 정답 선지 찾기
-    const correctChoice = question.choices.find((c) => c.isCorrect);
-
-    if (correctChoice && userAnswerId === correctChoice.id) {
-      userScore += question.score;
+    if (question.type === "OX" || question.type === "MULTIPLE_CHOICE") {
+      const correctChoice = question.choices.find((c) => c.isCorrect);
+      if (correctChoice && userAnswer === correctChoice.id) {
+        userScore += question.score;
+      }
+    } else if (question.type === "SHORT_ANSWER") {
+      const userAnswerText = userAnswer?.trim().toLowerCase();
+      const correctAnswerText = question.correctAnswer?.trim().toLowerCase();
+      if (userAnswerText && correctAnswerText && userAnswerText === correctAnswerText) {
+        userScore += question.score;
+      }
     }
+    // DESCRIPTIVE(서술형)은 수동 채점 대상이므로 자동 채점 시 0점 적용
   });
 
   // 3. 합격 여부 결정
@@ -74,6 +81,7 @@ export async function submitExam(examId: string, answers: { [questionId: string]
     data: {
       score: userScore,
       isPassed: isPassed,
+      answersJson: JSON.stringify(answers), // 학생이 기입해 제출한 답안지 원본 백업
       userId: userId,
       examId: examId,
     },

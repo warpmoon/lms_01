@@ -419,6 +419,18 @@ export default function CourseForm({ categories, instructors, categoriesWithCour
                         >
                           강의 관리
                         </Link>
+                        <Link
+                          href={`/admin/courses/${course.id}/exam`}
+                          style={{
+                            color: "#28a745",
+                            fontSize: "0.9rem",
+                            fontWeight: "600",
+                            marginRight: "0.8rem",
+                            textDecoration: "none",
+                          }}
+                        >
+                          시험 출제
+                        </Link>
                         <button onClick={() => handleOpenEdit(course)} className={styles.editBtn}>
                           수정
                         </button>

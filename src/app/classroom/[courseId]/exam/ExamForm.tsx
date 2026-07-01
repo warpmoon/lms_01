@@ -13,6 +13,7 @@ interface Choice {
 
 interface Question {
   id: string;
+  type: "OX" | "MULTIPLE_CHOICE" | "SHORT_ANSWER" | "DESCRIPTIVE";
   content: string;
   score: number;
   choices: Choice[];
@@ -182,26 +183,84 @@ export default function ExamForm({ exam, courseId }: ExamFormProps) {
                 <span>Q{index + 1}. {question.content}</span>
               </h3>
 
-              <div className={styles.choices}>
-                {question.choices.map((choice, cIndex) => {
-                  const isSelected = answers[question.id] === choice.id;
+              {/* 유형별 답안 영역 분기 */}
+              {(question.type === "OX" || question.type === "MULTIPLE_CHOICE") && (
+                <div className={styles.choices}>
+                  {question.choices.map((choice, cIndex) => {
+                    const isSelected = answers[question.id] === choice.id;
 
-                  return (
-                    <label
-                      key={choice.id}
-                      className={`${styles.choiceLabel} ${isSelected ? styles.choiceSelected : ""}`}
-                    >
-                      <input
-                        type="radio"
-                        name={`question-${question.id}`}
-                        checked={isSelected}
-                        onChange={() => handleSelectChoice(question.id, choice.id)}
-                      />
-                      <span>({cIndex + 1}) {choice.content}</span>
-                    </label>
-                  );
-                })}
-              </div>
+                    return (
+                      <label
+                        key={choice.id}
+                        className={`${styles.choiceLabel} ${isSelected ? styles.choiceSelected : ""}`}
+                      >
+                        <input
+                          type="radio"
+                          name={`question-${question.id}`}
+                          checked={isSelected}
+                          onChange={() => handleSelectChoice(question.id, choice.id)}
+                        />
+                        <span>
+                          {question.type === "OX"
+                            ? `${choice.content} (${choice.content === "O" ? "참" : "거짓"})`
+                            : `(${cIndex + 1}) ${choice.content}`}
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
+              )}
+
+              {question.type === "SHORT_ANSWER" && (
+                <div style={{ marginTop: "1rem" }}>
+                  <input
+                    type="text"
+                    style={{
+                      width: "100%",
+                      padding: "0.75rem 1rem",
+                      border: "1px solid #cbd5e0",
+                      borderRadius: "6px",
+                      fontSize: "0.95rem",
+                      outline: "none",
+                      boxSizing: "border-box",
+                    }}
+                    value={answers[question.id] || ""}
+                    onChange={(e) =>
+                      setAnswers((prev) => ({
+                        ...prev,
+                        [question.id]: e.target.value,
+                      }))
+                    }
+                    placeholder="여기에 주관식 단답형 답안을 기입해 주세요."
+                  />
+                </div>
+              )}
+
+              {question.type === "DESCRIPTIVE" && (
+                <div style={{ marginTop: "1rem" }}>
+                  <textarea
+                    rows={4}
+                    style={{
+                      width: "100%",
+                      padding: "0.75rem 1rem",
+                      border: "1px solid #cbd5e0",
+                      borderRadius: "6px",
+                      fontSize: "0.95rem",
+                      outline: "none",
+                      fontFamily: "inherit",
+                      boxSizing: "border-box",
+                    }}
+                    value={answers[question.id] || ""}
+                    onChange={(e) =>
+                      setAnswers((prev) => ({
+                        ...prev,
+                        [question.id]: e.target.value,
+                      }))
+                    }
+                    placeholder="여기에 서술형 주관식 답안을 길게 서술해 주세요."
+                  />
+                </div>
+              )}
             </div>
           ))}
         </div>
