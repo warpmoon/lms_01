@@ -8,14 +8,15 @@ import { auth } from "@/lib/auth";
 export default async function LessonPage({
   params,
 }: {
-  params: { courseId: string; lessonId: string };
+  params: Promise<{ courseId: string; lessonId: string }>;
 }) {
   const session = await auth();
   if (!session) {
     redirect("/login");
   }
 
-  const data = await getLessonWithProgress(params.courseId, params.lessonId);
+  const { courseId, lessonId } = await params;
+  const data = await getLessonWithProgress(courseId, lessonId);
 
   if (!data || !data.lesson) {
     notFound();
@@ -44,7 +45,7 @@ export default async function LessonPage({
           {course.lessons.map((item) => (
             <Link
               key={item.id}
-              href={`/classroom/${params.courseId}/${item.id}`}
+              href={`/classroom/${courseId}/${item.id}`}
               className={`${styles.lessonItem} ${item.id === lesson.id ? styles.active : ""}`}
             >
               <span className={styles.order}>{item.order}</span>

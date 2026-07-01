@@ -5,9 +5,10 @@ import styles from "./CourseDetail.module.css";
 export default async function CourseDetailPage({
   params,
 }: {
-  params: { courseId: string };
+  params: Promise<{ courseId: string }>;
 }) {
-  const course = await getCourseDetail(params.courseId);
+  const { courseId } = await params;
+  const course = await getCourseDetail(courseId);
 
   if (!course) {
     notFound();
@@ -22,7 +23,7 @@ export default async function CourseDetailPage({
           <p className={styles.description}>{course.description}</p>
           <div className={styles.meta}>
             <div className={styles.instructor}>
-              {course.instructor.image && <img src={course.instructor.image} alt={course.instructor.name} />}
+              {course.instructor.image && <img src={course.instructor.image} alt={course.instructor.name || "강사"} />}
               <span>{course.instructor.name} 강사</span>
             </div>
           </div>
