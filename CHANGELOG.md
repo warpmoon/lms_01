@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - **[추가]** `src/app/admin/courses/[courseId]/lessons/actions.ts` · 특정 강좌의 레슨 리스트 정렬 조회(`getCourseAndLessons`), 강의 신규 등록(`createLesson`), 정보 수정(`updateLesson`), 삭제(`deleteLesson`)를 연동하는 백오피스 Server Actions 개발
 - **[추가]** `src/app/admin/users/actions.ts` · 어드민 전체 가입 회원 조회(`getAllUsers`), 수강 신청 승인을 위한 강좌 목록 조회(`getAllCoursesList`), 회원 등급 변경(`updateUserRole`), 특정 유저 수강 승인 부여(`grantCourseAccess`) 및 회수(`revokeCourseAccess`)를 위한 Server Actions 개발
 - **[버그수정]** `src/lib/auth.ts` · Auth.js(NextAuth)의 jwt 및 session 콜백 함수를 수정하여 클라이언트 세션 객체에 사용자 고유 식별자(`user.id`) 바인딩이 누락되던 심각한 보안/라우트 접근 불가 예외 교정 완료
+- **[추가]** `src/app/admin/actions.ts` · 어드민 대시보드 4대 핵심 지표(전체 유저, 강좌 수, 당일 매출액, Q&A 개수) DB 실시간 집계 쿼리 및 최근 가입/결제완료/질문등록 이벤트를 시간순으로 병합 조회하는 타임라인 Server Actions 개발
 
 #### Frontend
 - **[추가]** `src/app/mypage/page.tsx` · 유저 학습 대시보드 마이페이지 신설 (Next.js 15+ 비동기 searchParams 기반 탭 라우팅 구현)
@@ -33,6 +34,8 @@ All notable changes to this project will be documented in this file.
 - **[추가]** `src/app/admin/users/page.tsx` · 어드민용 전체 회원 조회 및 관리 대시보드 페이지 구축
 - **[추가]** `src/app/admin/users/UserManagementForm.tsx` · 유저 권한 변경 동기화, 개별 회원 전용 수강 권한 상세 목록 모달 컨트롤러, 수동 권한 승인 및 회수 핸들링 클라이언트 단 개발
 - **[추가]** `src/app/admin/users/AdminUsers.module.css` · 회원 테이블 목록, 모달 오버레이 팝업, 수강 강좌 인라인 배지 UI CSS Modules 스타일 구축
+- **[변경]** `src/app/admin/page.tsx` · 대시보드 메인 페이지의 하드코딩 지표를 걷어내고 실시간 DB 수치 및 다각도 타임라인 테이블 동적 연동 완료
+- **[변경]** `src/app/admin/AdminPage.module.css` · 가입, 결제완료, Q&A 알림 타임라인 배지 등급별 컬러 스타일링 추가 구축
 
 #### Convention 변경
 - **[신규]** `.agents/skills/frontend/SKILL.md` · 프론트엔드 컴포넌트, 상태 관리, CSS Modules, Suspense 래핑 가이드라인 신설

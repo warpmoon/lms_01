@@ -58,10 +58,21 @@
 }
 
 .badge {
+  display: inline-block;
   background: #eef6ff;
   color: #0070f3;
-  padding: 0.2rem 0.5rem;
+  padding: 0.25rem 0.5rem;
   border-radius: 4px;
   font-size: 0.75rem;
   font-weight: bold;
+}
+
+.infoBadge {
+  background: #def7ec;
+  color: #03543f;
+}
+
+.warningBadge {
+  background: #ffe8cc;
+  color: #d9480f;
 }
