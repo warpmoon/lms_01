@@ -1,0 +1,264 @@
+.container {
+  padding: 1.5rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #1a1f36;
+}
+
+.topBar {
+  margin-bottom: 2.5rem;
+}
+
+.topBar h1 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #1a1f36;
+  margin-bottom: 0.25rem;
+}
+
+.topBar p {
+  color: #697386;
+  font-size: 0.95rem;
+}
+
+/* 회원 정보 테이블 카드 */
+.tableCard {
+  background: white;
+  border: 1px solid #e3e8ee;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.01);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th, .table td {
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid #e3e8ee;
+  font-size: 0.9rem;
+}
+
+.table th {
+  font-weight: 700;
+  color: #4f566b;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  background: #fafafa;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.row:hover {
+  background: #fcfcfc;
+}
+
+/* 역할 셀렉트 박스 */
+.roleSelect {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #e3e8ee;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a1f36;
+  outline: none;
+  background: white;
+  cursor: pointer;
+}
+
+.roleSelect:focus {
+  border-color: #0070f3;
+}
+
+/* 수강 현황 인라인 목록 */
+.courseBadgeList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-width: 350px;
+}
+
+.courseBadge {
+  background: #f7fafc;
+  color: #4f566b;
+  border: 1px solid #e3e8ee;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.manageBtn {
+  background: none;
+  border: none;
+  color: #0070f3;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.manageBtn:hover {
+  text-decoration: underline;
+}
+
+/* 권한 관리 모달 팝업 */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 550px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.modalHeader {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #e3e8ee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalHeader h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #a0aec0;
+  cursor: pointer;
+}
+
+.modalBody {
+  padding: 1.5rem;
+}
+
+.sectionTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a1f36;
+  margin-bottom: 0.75rem;
+  border-left: 3px solid #0070f3;
+  padding-left: 0.5rem;
+}
+
+/* 모달 내의 수강 정보 서식 */
+.modalCourseList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.modalCourseItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7fafc;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #e3e8ee;
+}
+
+.modalCourseTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.revokeBtn {
+  background: none;
+  border: none;
+  color: #dc3545;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.revokeBtn:hover {
+  text-decoration: underline;
+}
+
+/* 수강 수동 부여 셀렉트 폼 */
+.grantForm {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.select {
+  flex-grow: 1;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid #e3e8ee;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  outline: none;
+  background: white;
+}
+
+.select:focus {
+  border-color: #0070f3;
+}
+
+.grantBtn {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+
+.grantBtn:hover {
+  background: #218838;
+}
+
+.modalFooter {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid #e3e8ee;
+  background: #f7fafc;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.primaryBtn {
+  background: #0070f3;
+  color: white;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.primaryBtn:hover {
+  background: #0051cb;
+}

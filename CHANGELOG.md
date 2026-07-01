@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 - **[추가]** `.env`, `.env.example` · 포트원 API 연동용 `PORTONE_API_SECRET` 환경 변수 기입 및 가이드 갱신
 - **[추가]** `src/app/admin/courses/actions.ts` · 카테고리 생성/삭제 및 강좌 개설/수정/삭제 CRUD 비즈니스 로직과 담당 강사(User 중 강사/어드민) 풀 조회 Server Actions 개발
 - **[추가]** `src/app/admin/courses/[courseId]/lessons/actions.ts` · 특정 강좌의 레슨 리스트 정렬 조회(`getCourseAndLessons`), 강의 신규 등록(`createLesson`), 정보 수정(`updateLesson`), 삭제(`deleteLesson`)를 연동하는 백오피스 Server Actions 개발
+- **[추가]** `src/app/admin/users/actions.ts` · 어드민 전체 가입 회원 조회(`getAllUsers`), 수강 신청 승인을 위한 강좌 목록 조회(`getAllCoursesList`), 회원 등급 변경(`updateUserRole`), 특정 유저 수강 승인 부여(`grantCourseAccess`) 및 회수(`revokeCourseAccess`)를 위한 Server Actions 개발
 
 #### Frontend
 - **[추가]** `src/app/mypage/page.tsx` · 유저 학습 대시보드 마이페이지 신설 (Next.js 15+ 비동기 searchParams 기반 탭 라우팅 구현)
@@ -28,6 +29,9 @@ All notable changes to this project will be documented in this file.
 - **[추가]** `src/app/admin/courses/[courseId]/lessons/page.tsx` · 어드민용 특정 강좌 산하의 세부 레슨 관리 라우팅 페이지 구축
 - **[추가]** `src/app/admin/courses/[courseId]/lessons/LessonForm.tsx` · 강의 순서(Order) 매핑, 영상 재생 시간(분/초 분할 연산 입력), 비디오 주소 정보 입력 모달 폼 제어 및 레슨 테이블 리스트 렌더링 클라이언트 단 구축
 - **[추가]** `src/app/admin/courses/[courseId]/lessons/AdminLessons.module.css` · 레슨 목록 테이블, 등록/수정 모달창 서식 UI CSS Modules 스타일 구축
+- **[추가]** `src/app/admin/users/page.tsx` · 어드민용 전체 회원 조회 및 관리 대시보드 페이지 구축
+- **[추가]** `src/app/admin/users/UserManagementForm.tsx` · 유저 권한 변경 동기화, 개별 회원 전용 수강 권한 상세 목록 모달 컨트롤러, 수동 권한 승인 및 회수 핸들링 클라이언트 단 개발
+- **[추가]** `src/app/admin/users/AdminUsers.module.css` · 회원 테이블 목록, 모달 오버레이 팝업, 수강 강좌 인라인 배지 UI CSS Modules 스타일 구축
 
 #### Convention 변경
 - **[신규]** `.agents/skills/frontend/SKILL.md` · 프론트엔드 컴포넌트, 상태 관리, CSS Modules, Suspense 래핑 가이드라인 신설
