@@ -1,0 +1,304 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #1a1f36;
+}
+
+.header {
+  margin-bottom: 2.5rem;
+}
+
+.header h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #0070f3 0%, #00a4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header p {
+  color: #697386;
+  font-size: 1.1rem;
+}
+
+/* 탭 메뉴 */
+.tabBar {
+  display: flex;
+  gap: 1rem;
+  border-bottom: 2px solid #e3e8ee;
+  margin-bottom: 2.5rem;
+  overflow-x: auto;
+}
+
+.tabButton {
+  padding: 1rem 1.5rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #4f566b;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tabButton:hover {
+  color: #0070f3;
+}
+
+.activeTab {
+  color: #0070f3;
+  border-bottom-color: #0070f3;
+}
+
+/* 콘텐츠 영역 */
+.contentArea {
+  min-height: 400px;
+}
+
+/* 수강 중인 강좌 카드 그리드 */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.courseCard {
+  background: #ffffff;
+  border: 1px solid #e3e8ee;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.02), 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.courseCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(50, 50, 93, 0.08), 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.thumbnailWrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  background: #f7fafc;
+}
+
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardBody {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.category {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #0070f3;
+  margin-bottom: 0.5rem;
+}
+
+.courseTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+  color: #1a1f36;
+}
+
+.instructor {
+  font-size: 0.95rem;
+  color: #4f566b;
+  margin-bottom: 1.5rem;
+}
+
+.cardFooter {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.studyButton {
+  background: #0070f3;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.15s ease;
+}
+
+.studyButton:hover {
+  background: #0051cb;
+}
+
+/* 진도율 리포트 스타일 */
+.reportGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.reportCard {
+  background: white;
+  border: 1px solid #e3e8ee;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.reportInfo {
+  flex-grow: 1;
+}
+
+.reportInfo h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.reportMeta {
+  font-size: 0.9rem;
+  color: #4f566b;
+}
+
+.progressSection {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.progressBarContainer {
+  width: 100%;
+  height: 8px;
+  background: #e3e8ee;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background: #28a745;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4f566b;
+}
+
+/* 결제 내역 테이블 */
+.tableContainer {
+  background: white;
+  border: 1px solid #e3e8ee;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.01);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th, .table td {
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid #e3e8ee;
+  font-size: 0.95rem;
+}
+
+.table th {
+  background: #f7fafc;
+  font-weight: 700;
+  color: #4f566b;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.pending {
+  background: #ffe3e3;
+  color: #c53030;
+}
+
+.completed {
+  background: #def7ec;
+  color: #03543f;
+}
+
+.cancelled {
+  background: #e2e8f0;
+  color: #4a5568;
+}
+
+/* 빈 상태 표시 */
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  border: 2px dashed #e3e8ee;
+  border-radius: 12px;
+  background: #f7fafc;
+}
+
+.emptyState p {
+  color: #4f566b;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.emptyStateLink {
+  display: inline-block;
+  background: #0070f3;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.emptyStateLink:hover {
+  background: #0051cb;
+}
+
+@media (max-width: 768px) {
+  .reportCard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  
+  .progressSection {
+    width: 100%;
+  }
+}
