@@ -65,6 +65,15 @@ export default function CourseForm({ categories, instructors, categoriesWithCour
 
   // 2. 신규 강좌 등록 모달 열기
   const handleOpenCreate = () => {
+    if (categories.length === 0) {
+      const createCat = confirm(
+        "강좌를 개설하려면 먼저 카테고리 분류를 1개 이상 등록해야 합니다.\n카테고리 분류 추가 창을 여시겠습니까?"
+      );
+      if (createCat) {
+        setIsCategoryOpen(true);
+      }
+      return;
+    }
     setEditingCourse(null);
     setCourseData({
       title: "",
@@ -170,7 +179,7 @@ export default function CourseForm({ categories, instructors, categoriesWithCour
           <button onClick={() => setIsCategoryOpen(true)} className={styles.secondaryBtn}>
             + 분류 추가
           </button>
-          <button onClick={handleOpenCreate} className={styles.primaryBtn} disabled={categories.length === 0}>
+          <button onClick={handleOpenCreate} className={styles.primaryBtn}>
             + 신규 강좌 개설
           </button>
         </div>

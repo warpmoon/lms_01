@@ -36,6 +36,7 @@ All notable changes to this project will be documented in this file.
 - **[추가]** `src/app/admin/users/AdminUsers.module.css` · 회원 테이블 목록, 모달 오버레이 팝업, 수강 강좌 인라인 배지 UI CSS Modules 스타일 구축
 - **[변경]** `src/app/admin/page.tsx` · 대시보드 메인 페이지의 하드코딩 지표를 걷어내고 실시간 DB 수치 및 다각도 타임라인 테이블 동적 연동 완료
 - **[변경]** `src/app/admin/AdminPage.module.css` · 가입, 결제완료, Q&A 알림 타임라인 배지 등급별 컬러 스타일링 추가 구축
+- **[버그수정]** `src/app/admin/courses/CourseForm.tsx` · 카테고리가 0개일 때 '신규 강좌 개설' 잠금 단추의 비활성화(disabled)를 지우고, 클릭 시 카테고리 추가 팝업을 연계하여 안내 가이드를 띄우도록 사용성(UX) 오류 긴급 교정 완료
 
 #### Convention 변경
 - **[신규]** `.agents/skills/frontend/SKILL.md` · 프론트엔드 컴포넌트, 상태 관리, CSS Modules, Suspense 래핑 가이드라인 신설
