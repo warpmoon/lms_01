@@ -277,6 +277,7 @@
   font-size: 0.95rem;
   outline: none;
   font-family: inherit;
+  box-sizing: border-box;
 }
 
 .formGroup input:focus,

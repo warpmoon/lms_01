@@ -213,6 +213,7 @@
   border-radius: 6px;
   font-size: 0.95rem;
   outline: none;
+  box-sizing: border-box;
 }
 
 .formGroup input:focus {

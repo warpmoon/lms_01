@@ -217,6 +217,7 @@
   font-size: 0.9rem;
   outline: none;
   background: white;
+  box-sizing: border-box;
 }
 
 .select:focus {
