@@ -67,11 +67,8 @@ export default async function MyPage({ searchParams }: PageProps) {
             ) : (
               <div className={styles.grid}>
                 {courses.map((course) => {
-                  // 강의실 입장을 위한 첫 레슨 ID 확인
-                  const firstLessonId = course.lessons[0]?.id;
-                  const classroomUrl = firstLessonId
-                    ? `/classroom/${course.id}/${firstLessonId}`
-                    : `/courses/${course.id}`;
+                  // 강의실 홈 허브로 항상 이동 (레슨 유무 관계없이)
+                  const classroomUrl = `/classroom/${course.id}`;
 
                   return (
                     <div key={course.id} className={styles.courseCard}>

@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 ## [2026-07-01]
 
 #### Backend
+- **[추가]** `src/app/classroom/[courseId]/actions.ts` · 강좌 홈 허브용 강좌 기본 정보·커리큘럼·레슨별 진도 상태 일괄 조회 및 수강 권한 검증(결제 완료 여부 확인) `getCourseOverview` Server Action 개발 (ADMIN·INSTRUCTOR는 권한 검사 면제)
+
+#### Frontend
+- **[추가]** `src/app/classroom/[courseId]/page.tsx` · 강의실 강좌 홈 인덱스 페이지 신설 (404 해결) — 비동기 `params` 추출 및 수강 권한 데이터 서버에서 사전 조회 후 클라이언트 컴포넌트로 공급
+- **[추가]** `src/app/classroom/[courseId]/CourseHome.tsx` · 진도율 히어로 배너, 레슨별 완료/이어보기 상태 커리큘럼 목록, 이어보기 CTA 카드, 시험·과제·강좌 소개 사이드바 링크 카드를 통합한 강의실 메인 홈 클라이언트 컴포넌트 구축
+- **[추가]** `src/app/classroom/[courseId]/CourseHome.module.css` · 그라디언트 히어로 배너, 초록색 Progress Bar, 레슨 리스트(완료 시 초록 원형 체크), CTA/링크 카드 Hover 애니메이션 CSS Modules 스타일 신설
+
+#### Backend
 - **[추가]** `prisma/schema.prisma` · `Book` (교재), `OrderItem` (주문상세), `Exam` (시험), `Question` (시험문제), `Choice` (선지), `Submission` (제출), `Certificate` (수료증), `AccessLog` (접속로그) 데이터 모델 신설
 - **[변경]** `prisma/schema.prisma` · `Order`와 `Course` 간의 직접적인 N:1 결합 관계를 제거하고, 다중 구매/결제를 위해 `OrderItem`을 매개로 하는 1:N:1 다대다 형태의 매핑 구조로 변경
 - **[변경]** `src/app/product/checkout/actions.ts` · 개편된 주문 상세 구조(`OrderItem` 중첩 생성)에 대응하여 `createOrder` 쿼리 수정 및 보완
