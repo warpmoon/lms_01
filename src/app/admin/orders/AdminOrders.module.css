@@ -1,0 +1,160 @@
+.container {
+  padding: 1.5rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #1a1f36;
+}
+
+.topBar {
+  margin-bottom: 2rem;
+}
+
+.topBar h1 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #1a1f36;
+  margin-bottom: 0.25rem;
+}
+
+.topBar p {
+  color: #697386;
+  font-size: 0.95rem;
+}
+
+/* 필터 탭 스타일 */
+.filterTabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tabBtn {
+  background: white;
+  border: 1px solid #e3e8ee;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4f566b;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tabBtn:hover {
+  background: #f7fafc;
+}
+
+.activeTab {
+  background: #0070f3;
+  color: white;
+  border-color: #0070f3;
+}
+
+.activeTab:hover {
+  background: #0051cb;
+}
+
+/* 테이블 영역 */
+.tableCard {
+  background: white;
+  border: 1px solid #e3e8ee;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.01);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th,
+.table td {
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid #e3e8ee;
+  font-size: 0.9rem;
+}
+
+.table th {
+  font-weight: 700;
+  color: #4f566b;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  background: #fafafa;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.row:hover {
+  background: #fcfcfc;
+}
+
+/* 상태별 배지 */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.completed {
+  background: #def7ec;
+  color: #03543f;
+}
+
+.cancelled {
+  background: #fde8e8;
+  color: #9b1c1c;
+}
+
+.pending {
+  background: #fef08a;
+  color: #713f12;
+}
+
+/* 품목 나열 */
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.itemBadge {
+  font-size: 0.85rem;
+  color: #1a1f36;
+}
+
+.itemType {
+  font-size: 0.75rem;
+  color: #718096;
+  font-weight: 600;
+  margin-right: 0.4rem;
+}
+
+.cancelBtn {
+  background: none;
+  border: 1px solid #e3e8ee;
+  color: #dc3545;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.cancelBtn:hover {
+  background: #fde8e8;
+  border-color: #f8b4b4;
+}
+
+.emptyState {
+  padding: 3rem;
+  text-align: center;
+  color: #697386;
+  font-size: 0.95rem;
+}

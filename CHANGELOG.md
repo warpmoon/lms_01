@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file.
 - **[추가]** `prisma/schema.prisma` · 과제 관리 및 학생 제출 정보 적재를 위한 `Assignment` 및 `AssignmentSubmission` 관계형 데이터베이스 모델 신설 마이그레이션 반영 완료
 - **[추가]** `src/app/admin/courses/[courseId]/assignment/actions.ts` · 어드민용 과제 지침 세부 조회(`getAssignmentDetails`), 과제 지시서 생성/수정(`createOrUpdateAssignment`), 학생 제출물 수동 채점 및 코멘트 평가(`gradeAssignmentSubmission`) Server Actions 개발
 - **[추가]** `src/app/classroom/[courseId]/assignment/actions.ts` · 학생 과제 지침 조회 및 제출물 화이트리스트 확장자 필터링(`doc, docx, xls, xlsx, ppt, pptx, pdf, hwp, hwpx, show, cell`)을 통한 로컬 디렉토리 저장 & `AssignmentSubmission` 레코드 동적 생성/재제출 갱신 Server Actions 개발
+- **[추가]** `src/app/admin/orders/actions.ts` · 어드민 결제 내역 상세 조회(`getAllOrders`) 및 결제 강제 취소와 동시에 주문 항목 중 강좌 품목을 소지한 수강생의 진도율(`Progress`) 정보를 일괄 회수 삭제하는 원자적 트랜잭션 `cancelOrderAndRevokeAccess` Server Actions 개발
 
 #### Frontend
 - **[추가]** `src/app/mypage/page.tsx` · 유저 학습 대시보드 마이페이지 신설 (Next.js 15+ 비동기 searchParams 기반 탭 라우팅 구현)
@@ -54,6 +55,9 @@ All notable changes to this project will be documented in this file.
 - **[추가]** `src/app/classroom/[courseId]/assignment/page.tsx` · 수강생 과제 확인 및 제출실 라우트 페이지 신설
 - **[추가]** `src/app/classroom/[courseId]/assignment/AssignmentForm.tsx` · 지침 확인(설명 텍스트, 이미지 뷰어, 템플릿 다운로드) 및 특정 문서 확장자 제한 업로드 제출(재제출 포함)과 강사 채점 결과(점수, 피드백 코멘트) 렌더링 클라이언트 컴포넌트 구축 완료
 - **[추가]** `src/app/classroom/[courseId]/assignment/StudentAssignment.module.css` · 수강생용 과제 내용 서식, 문서 업로드 폼(Dashed 드래그 존 서식) 및 피드백 결과 알림 카드 CSS Modules 스타일링 신설
+- **[추가]** `src/app/admin/orders/page.tsx` · 어드민 결제 및 주문 거래내역 조회 대시보드 라우트 페이지 신설 (ADMIN 세션 차단 가드 적용)
+- **[추가]** `src/app/admin/orders/OrderListForm.tsx` · 전체/결제완료/결제취소/대기중 상태별 탭 필터링 및 원클릭 결제 강제 환불 처리 클라이언트 컴포넌트 구축 완료
+- **[추가]** `src/app/admin/orders/AdminOrders.module.css` · 완료/취소/대기 등급별 상태 배지, 다중 구매 품목(강좌/교재 분류 아이콘) 리스트, 주문 열람 테이블 CSS Modules 스타일링 신설
 
 #### Convention 변경
 - **[신규]** `.agents/skills/frontend/SKILL.md` · 프론트엔드 컴포넌트, 상태 관리, CSS Modules, Suspense 래핑 가이드라인 신설
