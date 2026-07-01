@@ -9,6 +9,9 @@ export default async function AdminUsersPage() {
   
   // 어드민 사용자 권한 차단 검사 (TypeScript as any 캐스팅 준수)
   const userRole = (session?.user as any)?.role;
+  console.log("=== DEBUG ADMIN USERS PAGE ===");
+  console.log("Session:", JSON.stringify(session));
+  console.log("User Role detected:", userRole);
   if (!session?.user?.id || userRole !== "ADMIN") {
     redirect("/");
   }

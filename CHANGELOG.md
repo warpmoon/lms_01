@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - **[추가]** `src/app/admin/courses/actions.ts` · 카테고리 생성/삭제 및 강좌 개설/수정/삭제 CRUD 비즈니스 로직과 담당 강사(User 중 강사/어드민) 풀 조회 Server Actions 개발
 - **[추가]** `src/app/admin/courses/[courseId]/lessons/actions.ts` · 특정 강좌의 레슨 리스트 정렬 조회(`getCourseAndLessons`), 강의 신규 등록(`createLesson`), 정보 수정(`updateLesson`), 삭제(`deleteLesson`)를 연동하는 백오피스 Server Actions 개발
 - **[추가]** `src/app/admin/users/actions.ts` · 어드민 전체 가입 회원 조회(`getAllUsers`), 수강 신청 승인을 위한 강좌 목록 조회(`getAllCoursesList`), 회원 등급 변경(`updateUserRole`), 특정 유저 수강 승인 부여(`grantCourseAccess`) 및 회수(`revokeCourseAccess`)를 위한 Server Actions 개발
+- **[버그수정]** `src/lib/auth.ts` · Auth.js(NextAuth)의 jwt 및 session 콜백 함수를 수정하여 클라이언트 세션 객체에 사용자 고유 식별자(`user.id`) 바인딩이 누락되던 심각한 보안/라우트 접근 불가 예외 교정 완료
 
 #### Frontend
 - **[추가]** `src/app/mypage/page.tsx` · 유저 학습 대시보드 마이페이지 신설 (Next.js 15+ 비동기 searchParams 기반 탭 라우팅 구현)
