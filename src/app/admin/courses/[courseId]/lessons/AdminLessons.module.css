@@ -1,0 +1,245 @@
+.container {
+  padding: 1.5rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #1a1f36;
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.titleSection h1 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #1a1f36;
+  margin-bottom: 0.25rem;
+}
+
+.titleSection p {
+  color: #697386;
+  font-size: 0.95rem;
+}
+
+.btnGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.primaryBtn {
+  background: #0070f3;
+  color: white;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.primaryBtn:hover {
+  background: #0051cb;
+}
+
+.secondaryBtn {
+  background: #f7fafc;
+  color: #4f566b;
+  border: 1px solid #e3e8ee;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+.secondaryBtn:hover {
+  background: #e3e8ee;
+  color: #1a1f36;
+}
+
+/* 강의 리스트 뷰포트 */
+.lessonListCard {
+  background: white;
+  border: 1px solid #e3e8ee;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.01);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th, .table td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e3e8ee;
+  font-size: 0.9rem;
+}
+
+.table th {
+  font-weight: 700;
+  color: #4f566b;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  background: #fafafa;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.row:hover {
+  background: #fcfcfc;
+}
+
+.orderBadge {
+  background: #e6f0ff;
+  color: #0070f3;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.videoLink {
+  color: #4f566b;
+  font-size: 0.85rem;
+  word-break: break-all;
+}
+
+.actionCell {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.editBtn {
+  background: none;
+  border: none;
+  color: #0070f3;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.editBtn:hover {
+  text-decoration: underline;
+}
+
+.deleteBtn {
+  background: none;
+  border: none;
+  color: #dc3545;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.deleteBtn:hover {
+  text-decoration: underline;
+}
+
+/* 모달 양식 */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.modalHeader {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #e3e8ee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalHeader h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #a0aec0;
+  cursor: pointer;
+}
+
+.modalBody {
+  padding: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.formGroup label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4f566b;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="number"] {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid #e3e8ee;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.formGroup input:focus {
+  border-color: #0070f3;
+  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.15);
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.modalFooter {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid #e3e8ee;
+  background: #f7fafc;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  border: 2px dashed #e3e8ee;
+  border-radius: 12px;
+  background: #f7fafc;
+  color: #4f566b;
+}

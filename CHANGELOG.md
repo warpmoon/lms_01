@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 - **[추가]** `src/app/product/checkout/actions.ts` · 결제 검증 완료와 동시에 `prisma.$transaction`을 실행하여 주문한 강좌들의 수강 진도(`Progress`) 데이터를 일괄 자동 생성(수강 권한 즉시 활성화)하는 비즈니스 파이프라인 탑재
 - **[추가]** `.env`, `.env.example` · 포트원 API 연동용 `PORTONE_API_SECRET` 환경 변수 기입 및 가이드 갱신
 - **[추가]** `src/app/admin/courses/actions.ts` · 카테고리 생성/삭제 및 강좌 개설/수정/삭제 CRUD 비즈니스 로직과 담당 강사(User 중 강사/어드민) 풀 조회 Server Actions 개발
+- **[추가]** `src/app/admin/courses/[courseId]/lessons/actions.ts` · 특정 강좌의 레슨 리스트 정렬 조회(`getCourseAndLessons`), 강의 신규 등록(`createLesson`), 정보 수정(`updateLesson`), 삭제(`deleteLesson`)를 연동하는 백오피스 Server Actions 개발
 
 #### Frontend
 - **[추가]** `src/app/mypage/page.tsx` · 유저 학습 대시보드 마이페이지 신설 (Next.js 15+ 비동기 searchParams 기반 탭 라우팅 구현)
@@ -23,7 +24,10 @@ All notable changes to this project will be documented in this file.
 - **[추가]** `src/app/classroom/[courseId]/exam/ExamPage.module.css` · 플로팅 스톱워치, 시험지 서식, Pass/Fail 결과 연출 카드 UI CSS Modules 스타일 구축
 - **[추가]** `src/app/admin/courses/page.tsx` · 어드민용 강좌/카테고리 관리 대시보드 페이지 구축 (ADMIN 역할 세션 검증 적용)
 - **[추가]** `src/app/admin/courses/CourseForm.tsx` · 분류 생성, 신규 강좌 정보 기입 및 강사 지정 배정 모달 폼 컨트롤과 전체 카테고리별 테이블 목록 렌더링을 처리하는 백오피스 인터랙션 클라이언트 단 구축
-- **[추가]** `src/app/admin/courses/AdminCourses.module.css` · 모달창 팝업 디자인, 폼 서식 레이아웃, 어드민 분류 목록 테이블 UI CSS Modules 스타일 구축
+- **[변경]** `src/app/admin/courses/CourseForm.tsx` · 각 강좌 행의 액션 셀에 '강의 관리' Link 바로가기 단추 이식 완료
+- **[추가]** `src/app/admin/courses/[courseId]/lessons/page.tsx` · 어드민용 특정 강좌 산하의 세부 레슨 관리 라우팅 페이지 구축
+- **[추가]** `src/app/admin/courses/[courseId]/lessons/LessonForm.tsx` · 강의 순서(Order) 매핑, 영상 재생 시간(분/초 분할 연산 입력), 비디오 주소 정보 입력 모달 폼 제어 및 레슨 테이블 리스트 렌더링 클라이언트 단 구축
+- **[추가]** `src/app/admin/courses/[courseId]/lessons/AdminLessons.module.css` · 레슨 목록 테이블, 등록/수정 모달창 서식 UI CSS Modules 스타일 구축
 
 #### Convention 변경
 - **[신규]** `.agents/skills/frontend/SKILL.md` · 프론트엔드 컴포넌트, 상태 관리, CSS Modules, Suspense 래핑 가이드라인 신설

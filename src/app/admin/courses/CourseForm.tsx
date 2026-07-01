@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   createCategory,
   deleteCategory,
@@ -397,6 +398,18 @@ export default function CourseForm({ categories, instructors, categoriesWithCour
                         </span>
                       </td>
                       <td className={styles.actionCell}>
+                        <Link
+                          href={`/admin/courses/${course.id}/lessons`}
+                          style={{
+                            color: "#0070f3",
+                            fontSize: "0.9rem",
+                            fontWeight: "600",
+                            marginRight: "0.8rem",
+                            textDecoration: "none",
+                          }}
+                        >
+                          강의 관리
+                        </Link>
                         <button onClick={() => handleOpenEdit(course)} className={styles.editBtn}>
                           수정
                         </button>
