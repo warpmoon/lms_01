@@ -33,6 +33,10 @@ model User {
   posts         Post[]      // 작성한 게시글(Q&A, 후기)
   userCoupons   UserCoupon[]
   ownedCourses  Course[]    @relation("InstructorCourses") // 강사일 경우
+  
+  submissions   Submission[]  // 온라인 시험 제출 내역
+  certificates  Certificate[] // 수료증 발급 내역
+  accessLogs    AccessLog[]   // 보안 및 기기 접속 로그
 }
 
 // --- 2. 강좌 및 강의 ---
@@ -56,10 +60,12 @@ model Course {
   instructorId String
   instructor   User     @relation("InstructorCourses", fields: [instructorId], references: [id])
 
-  lessons     Lesson[]
-  orders      Order[]
-  posts       Post[]
-  createdAt   DateTime @default(now())
+  lessons      Lesson[]
+  orderItems   OrderItem[]  // 주문 항목 연동 (기존 orders 제거)
+  posts        Post[]
+  exams        Exam[]       // 시험 정보 연동
+  certificates Certificate[] // 수료증 발급 연동
+  createdAt    DateTime @default(now())
 }
 
 model Lesson {
@@ -107,13 +113,40 @@ model Order {
   userId        String
   user          User        @relation(fields: [userId], references: [id])
   
-  courseId      String
-  course        Course      @relation(fields: [courseId], references: [id])
+  orderItems    OrderItem[] // 1:N 주문 상세 항목으로 변경
   
   createdAt     DateTime    @default(now())
 }
 
-// --- 5. 쿠폰 시스템 ---
+model OrderItem {
+  id        String   @id @default(cuid())
+  price     Int      // 구매 시점의 단가
+  quantity  Int      @default(1)
+  
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  courseId  String?
+  course    Course?  @relation(fields: [courseId], references: [id])
+  
+  bookId    String?
+  book      Book?    @relation(fields: [bookId], references: [id])
+}
+
+// --- 5. 교재 (도서 쇼핑몰 확장) ---
+model Book {
+  id          String   @id @default(cuid())
+  title       String
+  description String?  @db.Text
+  price       Int      @default(0)
+  thumbnail   String?
+  stock       Int      @default(0)
+  createdAt   DateTime @default(now())
+  
+  orderItems  OrderItem[]
+}
+
+// --- 6. 쿠폰 시스템 ---
 model Coupon {
   id          String   @id @default(cuid())
   code        String   @unique
@@ -136,7 +169,7 @@ model UserCoupon {
   coupon    Coupon   @relation(fields: [couponId], references: [id])
 }
 
-// --- 6. 커뮤니티 (Q&A, 수강후기) ---
+// --- 7. 커뮤니티 (Q&A, 수강후기) ---
 enum PostType {
   QNA
   REVIEW
@@ -156,4 +189,77 @@ model Post {
   course    Course   @relation(fields: [courseId], references: [id])
   
   createdAt DateTime @default(now())
+}
+
+// --- 8. 온라인 시험 시스템 ---
+model Exam {
+  id          String   @id @default(cuid())
+  title       String
+  description String?  @db.Text
+  duration    Int      @default(60) // 제한 시간 (분)
+  passingScore Int     @default(60) // 합격 기준 점수 (100점 만점 기준 등)
+  
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  
+  questions   Question[]
+  submissions Submission[]
+  createdAt   DateTime @default(now())
+}
+
+model Question {
+  id        String   @id @default(cuid())
+  content   String   @db.Text
+  score     Int      @default(10) // 문제 배점
+  
+  examId    String
+  exam      Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+  
+  choices   Choice[]
+}
+
+model Choice {
+  id          String   @id @default(cuid())
+  content     String
+  isCorrect   Boolean  @default(false)
+  
+  questionId  String
+  question    Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+}
+
+model Submission {
+  id        String   @id @default(cuid())
+  score     Int
+  isPassed  Boolean  @default(false)
+  submittedAt DateTime @default(now())
+  
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  examId    String
+  exam      Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+}
+
+// --- 9. 수료증 발급 ---
+model Certificate {
+  id          String   @id @default(cuid())
+  certNumber  String   @unique // 수료증 고유 번호
+  issuedAt    DateTime @default(now())
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+}
+
+// --- 10. 기기 접속 로그 및 IP 보안 ---
+model AccessLog {
+  id        String   @id @default(cuid())
+  ipAddress String
+  userAgent String
+  createdAt DateTime @default(now())
+  
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

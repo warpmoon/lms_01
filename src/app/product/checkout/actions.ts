@@ -14,9 +14,15 @@ export async function createOrder(courseId: string, amount: number) {
   return await prisma.order.create({
     data: {
       userId: session.user.id,
-      courseId: courseId,
       amount: amount,
       status: "PENDING",
+      orderItems: {
+        create: {
+          price: amount,
+          quantity: 1,
+          courseId: courseId,
+        },
+      },
     },
   });
 }
