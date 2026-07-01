@@ -10,6 +10,9 @@ All notable changes to this project will be documented in this file.
 - **[변경]** `src/app/product/checkout/actions.ts` · 개편된 주문 상세 구조(`OrderItem` 중첩 생성)에 대응하여 `createOrder` 쿼리 수정 및 보완
 - **[추가]** `src/app/mypage/actions.ts` · 유저의 수강 강좌(`getMyEnrollments`), 주문 내역(`getMyOrders`), 강좌별 강의 진척 백분율 분석(`getMyProgressReport`) 데이터 조회용 Server Actions 개발
 - **[추가]** `src/app/classroom/[courseId]/exam/actions.ts` · 보안을 위해 정답여부(`isCorrect`)를 소거하고 시험지를 가져오는 `getExamData` 및 서버 사이드 채점 & 채점기록을 누적 저장하는 `submitExam` Server Actions 개발
+- **[변경]** `src/app/product/checkout/actions.ts` · 포트원 V2 외부 결제 상세 조회 API를 통한 실시간 금액 위변조 교차 검증(`verifyPayment`) 및 검증 실패 시 자동 결제 취소 API 연동
+- **[추가]** `src/app/product/checkout/actions.ts` · 결제 검증 완료와 동시에 `prisma.$transaction`을 실행하여 주문한 강좌들의 수강 진도(`Progress`) 데이터를 일괄 자동 생성(수강 권한 즉시 활성화)하는 비즈니스 파이프라인 탑재
+- **[추가]** `.env`, `.env.example` · 포트원 API 연동용 `PORTONE_API_SECRET` 환경 변수 기입 및 가이드 갱신
 
 #### Frontend
 - **[추가]** `src/app/mypage/page.tsx` · 유저 학습 대시보드 마이페이지 신설 (Next.js 15+ 비동기 searchParams 기반 탭 라우팅 구현)
