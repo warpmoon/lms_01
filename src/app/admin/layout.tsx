@@ -25,6 +25,7 @@ export default async function AdminLayout({
           <Link href="/admin/users">회원 관리</Link>
           <Link href="/admin/courses">강좌 관리</Link>
           <Link href="/admin/orders">결제 관리</Link>
+          <Link href="/admin/posts">게시판 관리</Link>
           <Link href="/">사이트 바로가기</Link>
         </nav>
       </aside>

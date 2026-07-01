@@ -25,6 +25,9 @@ All notable changes to this project will be documented in this file.
 - **[추가]** `src/app/admin/courses/[courseId]/assignment/actions.ts` · 어드민용 과제 지침 세부 조회(`getAssignmentDetails`), 과제 지시서 생성/수정(`createOrUpdateAssignment`), 학생 제출물 수동 채점 및 코멘트 평가(`gradeAssignmentSubmission`) Server Actions 개발
 - **[추가]** `src/app/classroom/[courseId]/assignment/actions.ts` · 학생 과제 지침 조회 및 제출물 화이트리스트 확장자 필터링(`doc, docx, xls, xlsx, ppt, pptx, pdf, hwp, hwpx, show, cell`)을 통한 로컬 디렉토리 저장 & `AssignmentSubmission` 레코드 동적 생성/재제출 갱신 Server Actions 개발
 - **[추가]** `src/app/admin/orders/actions.ts` · 어드민 결제 내역 상세 조회(`getAllOrders`) 및 결제 강제 취소와 동시에 주문 항목 중 강좌 품목을 소지한 수강생의 진도율(`Progress`) 정보를 일괄 회수 삭제하는 원자적 트랜잭션 `cancelOrderAndRevokeAccess` Server Actions 개발
+- **[추가]** `prisma/schema.prisma` · `PostType` Enum에 `NOTICE` 공지사항 유형 증설, `Post` 모델에 `boardCategory` (카테고리), `reply` / `repliedAt` (답변) 컬럼 추가 및 특정 강좌와 무관한 공통 글 게재를 지원하도록 `courseId` nullable 완화 마이그레이션 적용
+- **[추가]** `src/app/admin/posts/actions.ts` · 전체 게시글 조회(`getAllPosts`), 공지사항 신규 게재(`createNoticePost`), 수강생 Q&A 질문글 답변 작성(`replyToPost`), 부적절한 게시글 삭제(`deletePost`) Server Actions 개발
+- **[버그수정]** `src/app/admin/actions.ts` · 공지사항(`NOTICE`)의 경우 `post.course` 필드가 null 임에 대응해 옵션 가드를 추가하고, 대시보드 최근 활동 타임라인 상에 공지사항 발행 로그도 매끄럽게 동기 렌더링되도록 보정 완료
 
 #### Frontend
 - **[추가]** `src/app/mypage/page.tsx` · 유저 학습 대시보드 마이페이지 신설 (Next.js 15+ 비동기 searchParams 기반 탭 라우팅 구현)
@@ -58,6 +61,10 @@ All notable changes to this project will be documented in this file.
 - **[추가]** `src/app/admin/orders/page.tsx` · 어드민 결제 및 주문 거래내역 조회 대시보드 라우트 페이지 신설 (ADMIN 세션 차단 가드 적용)
 - **[추가]** `src/app/admin/orders/OrderListForm.tsx` · 전체/결제완료/결제취소/대기중 상태별 탭 필터링 및 원클릭 결제 강제 환불 처리 클라이언트 컴포넌트 구축 완료
 - **[추가]** `src/app/admin/orders/AdminOrders.module.css` · 완료/취소/대기 등급별 상태 배지, 다중 구매 품목(강좌/교재 분류 아이콘) 리스트, 주문 열람 테이블 CSS Modules 스타일링 신설
+- **[변경]** `src/app/admin/layout.tsx` · 어드민 사이드바 메뉴바에 "게시판 관리" Link 정상 매핑 완료
+- **[추가]** `src/app/admin/posts/page.tsx` · 어드민 전체 게시글 및 공지사항 제어 라우트 페이지 신설 (ADMIN 세션 가드 작동)
+- **[추가]** `src/app/admin/posts/PostListForm.tsx` · 게시글 구분별(전체, Q&A, 수강후기, 공지) 탭 전환 필터링, 공지사항(NOTICE) 입력 모달, Q&A 질문글 상세 조회 및 즉석 관리자 답변(`reply`) 저장 폼 클라이언트 컴포넌트 구축 완료
+- **[추가]** `src/app/admin/posts/AdminPosts.module.css` · 게시글 상태 배지(Q&A, 후기, 공지 및 답변대기/완료), 답변 입력창, 공지 발행 양식 CSS Modules 스타일 신설
 
 #### Convention 변경
 - **[신규]** `.agents/skills/frontend/SKILL.md` · 프론트엔드 컴포넌트, 상태 관리, CSS Modules, Suspense 래핑 가이드라인 신설

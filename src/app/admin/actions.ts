@@ -120,13 +120,23 @@ export async function getAdminRecentActivities(): Promise<AdminActivity[]> {
   // 게시글 작성 활동 매핑
   recentPosts.forEach((post) => {
     const isQna = post.type === "QNA";
+    const isNotice = post.type === "NOTICE";
+    const targetDesc = post.course ? `'${post.course.title}' 강좌에 ` : "";
+
+    let content = "";
+    if (isNotice) {
+      content = `공지사항 [${post.boardCategory}] '${post.title}' 글이 등록되었습니다.`;
+    } else {
+      content = `'${post.user.name || post.user.email}' 님이 ${targetDesc}새 ${
+        isQna ? "질문(Q&A)" : "수강 후기"
+      }를 등록했습니다.`;
+    }
+
     activities.push({
       id: `post-${post.id}`,
       time: post.createdAt,
-      content: `'${post.user.name || post.user.email}' 님이 '${post.course.title}' 강좌에 새 ${
-        isQna ? "질문(Q&A)" : "수강 후기"
-      }를 등록했습니다.`,
-      status: isQna ? "WARNING" : "SUCCESS",
+      content,
+      status: isNotice ? "SUCCESS" : (isQna ? "WARNING" : "SUCCESS"),
     });
   });
 
