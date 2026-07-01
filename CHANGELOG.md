@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - **[변경]** `src/app/product/checkout/actions.ts` · 포트원 V2 외부 결제 상세 조회 API를 통한 실시간 금액 위변조 교차 검증(`verifyPayment`) 및 검증 실패 시 자동 결제 취소 API 연동
 - **[추가]** `src/app/product/checkout/actions.ts` · 결제 검증 완료와 동시에 `prisma.$transaction`을 실행하여 주문한 강좌들의 수강 진도(`Progress`) 데이터를 일괄 자동 생성(수강 권한 즉시 활성화)하는 비즈니스 파이프라인 탑재
 - **[추가]** `.env`, `.env.example` · 포트원 API 연동용 `PORTONE_API_SECRET` 환경 변수 기입 및 가이드 갱신
+- **[추가]** `src/app/admin/courses/actions.ts` · 카테고리 생성/삭제 및 강좌 개설/수정/삭제 CRUD 비즈니스 로직과 담당 강사(User 중 강사/어드민) 풀 조회 Server Actions 개발
 
 #### Frontend
 - **[추가]** `src/app/mypage/page.tsx` · 유저 학습 대시보드 마이페이지 신설 (Next.js 15+ 비동기 searchParams 기반 탭 라우팅 구현)
@@ -20,6 +21,9 @@ All notable changes to this project will be documented in this file.
 - **[추가]** `src/app/classroom/[courseId]/exam/page.tsx` · 온라인 시험 응시 진입 관문 및 동적 params Promise 비동기 래핑 페이지 구축
 - **[추가]** `src/app/classroom/[courseId]/exam/ExamForm.tsx` · 실시간 타이머(시간 경과 시 자동 수집), 문항 무결성 렌더링, 채점 결과 화면 탭 전환을 수행하는 클라이언트 모듈 구축
 - **[추가]** `src/app/classroom/[courseId]/exam/ExamPage.module.css` · 플로팅 스톱워치, 시험지 서식, Pass/Fail 결과 연출 카드 UI CSS Modules 스타일 구축
+- **[추가]** `src/app/admin/courses/page.tsx` · 어드민용 강좌/카테고리 관리 대시보드 페이지 구축 (ADMIN 역할 세션 검증 적용)
+- **[추가]** `src/app/admin/courses/CourseForm.tsx` · 분류 생성, 신규 강좌 정보 기입 및 강사 지정 배정 모달 폼 컨트롤과 전체 카테고리별 테이블 목록 렌더링을 처리하는 백오피스 인터랙션 클라이언트 단 구축
+- **[추가]** `src/app/admin/courses/AdminCourses.module.css` · 모달창 팝업 디자인, 폼 서식 레이아웃, 어드민 분류 목록 테이블 UI CSS Modules 스타일 구축
 
 #### Convention 변경
 - **[신규]** `.agents/skills/frontend/SKILL.md` · 프론트엔드 컴포넌트, 상태 관리, CSS Modules, Suspense 래핑 가이드라인 신설
