@@ -431,6 +431,18 @@ export default function CourseForm({ categories, instructors, categoriesWithCour
                         >
                           시험 출제
                         </Link>
+                        <Link
+                          href={`/admin/courses/${course.id}/assignment`}
+                          style={{
+                            color: "#e67e22",
+                            fontSize: "0.9rem",
+                            fontWeight: "600",
+                            marginRight: "0.8rem",
+                            textDecoration: "none",
+                          }}
+                        >
+                          과제 관리
+                        </Link>
                         <button onClick={() => handleOpenEdit(course)} className={styles.editBtn}>
                           수정
                         </button>

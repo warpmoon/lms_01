@@ -37,6 +37,7 @@ model User {
   submissions   Submission[]  // 온라인 시험 제출 내역
   certificates  Certificate[] // 수료증 발급 내역
   accessLogs    AccessLog[]   // 보안 및 기기 접속 로그
+  assignmentSubmissions AssignmentSubmission[] // 과제 제출 내역
 }
 
 // --- 2. 강좌 및 강의 ---
@@ -65,6 +66,7 @@ model Course {
   posts        Post[]
   exams        Exam[]       // 시험 정보 연동
   certificates Certificate[] // 수료증 발급 연동
+  assignments  Assignment[]  // 과제 정보 연동
   createdAt    DateTime @default(now())
 }
 
@@ -272,4 +274,34 @@ model AccessLog {
   
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// --- 11. 과제 및 결과물 제출 시스템 ---
+model Assignment {
+  id          String   @id @default(cuid())
+  title       String
+  content     String   @db.Text
+  imageUrl    String?  @db.Text // 과제 설명용 이미지 URL
+  fileUrl     String?  @db.Text // 과제 설명용 참고 첨부파일 URL
+  createdAt   DateTime @default(now())
+  
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  
+  submissions AssignmentSubmission[]
+}
+
+model AssignmentSubmission {
+  id           String   @id @default(cuid())
+  fileUrl      String   @db.Text // 학생이 제출한 결과물 문서 파일 URL
+  fileName     String   // 표시용 원본 파일 이름
+  score        Int?     // 채점 점수 (NULL 가능, 강사 채점 대기)
+  feedback     String?  @db.Text // 강사 피드백
+  submittedAt  DateTime @default(now())
+  
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  assignmentId String
+  assignment   Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
 }

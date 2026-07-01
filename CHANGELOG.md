@@ -21,6 +21,9 @@ All notable changes to this project will be documented in this file.
 - **[추가]** `prisma/schema.prisma` · 4대 유형별 시험을 지원하기 위해 `QuestionType` Enum (`OX`, `MULTIPLE_CHOICE`, `SHORT_ANSWER`, `DESCRIPTIVE`) 신설, `Question`에 `type` 및 `correctAnswer` 컬럼 추가, `Submission`에 제출 답안 원본 보관용 `answersJson` 컬럼 추가 마이그레이션 적용
 - **[추가]** `src/app/admin/courses/[courseId]/exam/actions.ts` · 어드민용 시험 상세조회(`getCourseExamDetails`), 시험 규격 저장(`createOrUpdateExam`), 4대 유형별 문항 및 N개 선택지 트랜잭션 출제(`createQuestion`), 문항 삭제(`deleteQuestion`) Server Actions 개발
 - **[변경]** `src/app/classroom/[courseId]/exam/actions.ts` · OX(선지대조), 객관식(선지대조), 단답형(텍스트 공백/대소문자 제거 비교) 채점 조건 분기 및 제출 답안 `answersJson` 문자열 저장 맵핑이 적용된 확장 채점 엔진 업데이트 완료
+- **[추가]** `prisma/schema.prisma` · 과제 관리 및 학생 제출 정보 적재를 위한 `Assignment` 및 `AssignmentSubmission` 관계형 데이터베이스 모델 신설 마이그레이션 반영 완료
+- **[추가]** `src/app/admin/courses/[courseId]/assignment/actions.ts` · 어드민용 과제 지침 세부 조회(`getAssignmentDetails`), 과제 지시서 생성/수정(`createOrUpdateAssignment`), 학생 제출물 수동 채점 및 코멘트 평가(`gradeAssignmentSubmission`) Server Actions 개발
+- **[추가]** `src/app/classroom/[courseId]/assignment/actions.ts` · 학생 과제 지침 조회 및 제출물 화이트리스트 확장자 필터링(`doc, docx, xls, xlsx, ppt, pptx, pdf, hwp, hwpx, show, cell`)을 통한 로컬 디렉토리 저장 & `AssignmentSubmission` 레코드 동적 생성/재제출 갱신 Server Actions 개발
 
 #### Frontend
 - **[추가]** `src/app/mypage/page.tsx` · 유저 학습 대시보드 마이페이지 신설 (Next.js 15+ 비동기 searchParams 기반 탭 라우팅 구현)
@@ -30,7 +33,7 @@ All notable changes to this project will be documented in this file.
 - **[추가]** `src/app/classroom/[courseId]/exam/ExamPage.module.css` · 플로팅 스톱워치, 시험지 서식, Pass/Fail 결과 연출 카드 UI CSS Modules 스타일 구축
 - **[추가]** `src/app/admin/courses/page.tsx` · 어드민용 강좌/카테고리 관리 대시보드 페이지 구축 (ADMIN 역할 세션 검증 적용)
 - **[추가]** `src/app/admin/courses/CourseForm.tsx` · 분류 생성, 신규 강좌 정보 기입 및 강사 지정 배정 모달 폼 컨트롤과 전체 카테고리별 테이블 목록 렌더링을 처리하는 백오피스 인터랙션 클라이언트 단 구축
-- **[변경]** `src/app/admin/courses/CourseForm.tsx` · 각 강좌 행의 액션 셀에 '강의 관리' 및 '시험 출제' Link 바로가기 단추 이식 완료
+- **[변경]** `src/app/admin/courses/CourseForm.tsx` · 각 강좌 행의 액션 셀에 '강의 관리', '시험 출제', '과제 관리' Link 바로가기 단추 이식 완료
 - **[추가]** `src/app/admin/courses/[courseId]/lessons/page.tsx` · 어드민용 특정 강좌 산하의 세부 레슨 관리 라우팅 페이지 구축
 - **[추가]** `src/app/admin/courses/[courseId]/lessons/LessonForm.tsx` · 강의 순서(Order) 매핑, 영상 재생 시간(분/초 연산 입력), 비디오 주소 정보 입력 모달 폼 제어 및 레슨 테이블 리스트 렌더링 클라이언트 단 구축
 - **[추가]** `src/app/admin/courses/[courseId]/lessons/AdminLessons.module.css` · 레슨 목록 테이블, 등록/수정 모달창 서식 UI CSS Modules 스타일 구축
@@ -45,6 +48,12 @@ All notable changes to this project will be documented in this file.
 - **[추가]** `src/app/admin/courses/[courseId]/exam/ExamForm.tsx` · 드롭다운 선택에 따라 OX(참/거짓), 객관식(N개 선지 동적 가감), 단답형(정답 텍스트), 서술형(모범 가이드) 입력 필드가 동적으로 노출되는 대화형 문항 출제 및 시험 타이머 기본 규격 설정 제어 클라이언트 컴포넌트 개발 완료
 - **[추가]** `src/app/admin/courses/[courseId]/exam/AdminExam.module.css` · 가로 이탈 방지형 폼 박스 모델, 출제 문항 정보 카드, OX 정답체크 및 라디오 단추 CSS Modules 스타일링 신설
 - **[변경]** `src/app/classroom/[courseId]/exam/ExamForm.tsx` · 4대 문제 유형 구조에 반응하여 OX형 라디오, 객관식 라디오, 단답형 text input, 서술형 textarea를 문항 카드마다 적확하게 교체해 렌더링하는 다차원 시험 응시실 화면으로 고도화 확장 완료
+- **[추가]** `src/app/admin/courses/[courseId]/assignment/page.tsx` · 어드민 과제 관리 라우트 페이지 신설 (ADMIN 세션 체크 및 비동기 params 추출)
+- **[추가]** `src/app/admin/courses/[courseId]/assignment/AssignmentForm.tsx` · 과제 지침 설정(제목, 텍스트 가이드, 설명용 이미지 주소, 템플릿 파일 다운로드 경로) 및 수강생들의 파일 제출 상세 현황 열람 & 수동 평가 점수/피드백 모달 창 바인딩 클라이언트 컴포넌트 구축 완료
+- **[추가]** `src/app/admin/courses/[courseId]/assignment/AdminAssignment.module.css` · 과제 설정 카드, 수강생 제출 상태 테이블 리스트, 채점 모달 스타일 모듈 신설
+- **[추가]** `src/app/classroom/[courseId]/assignment/page.tsx` · 수강생 과제 확인 및 제출실 라우트 페이지 신설
+- **[추가]** `src/app/classroom/[courseId]/assignment/AssignmentForm.tsx` · 지침 확인(설명 텍스트, 이미지 뷰어, 템플릿 다운로드) 및 특정 문서 확장자 제한 업로드 제출(재제출 포함)과 강사 채점 결과(점수, 피드백 코멘트) 렌더링 클라이언트 컴포넌트 구축 완료
+- **[추가]** `src/app/classroom/[courseId]/assignment/StudentAssignment.module.css` · 수강생용 과제 내용 서식, 문서 업로드 폼(Dashed 드래그 존 서식) 및 피드백 결과 알림 카드 CSS Modules 스타일링 신설
 
 #### Convention 변경
 - **[신규]** `.agents/skills/frontend/SKILL.md` · 프론트엔드 컴포넌트, 상태 관리, CSS Modules, Suspense 래핑 가이드라인 신설
